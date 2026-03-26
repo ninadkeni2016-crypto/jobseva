@@ -81,8 +81,8 @@ export default function AdminDashboard() {
                 <p className="text-2xl font-heading font-bold mt-1">{stat.value}</p>
               </div>
               <div className={`p-2 rounded-xl ${stat.variant === "purple" ? "bg-primary/10 text-primary" :
-                  stat.variant === "orange" ? "bg-warning/10 text-warning" :
-                    "bg-success/10 text-success"
+                stat.variant === "orange" ? "bg-warning/10 text-warning" :
+                  "bg-success/10 text-success"
                 }`}>
                 <stat.icon className="w-5 h-5" />
               </div>
@@ -137,8 +137,12 @@ export default function AdminDashboard() {
           <div className="space-y-3">
             {mockCompanies.filter((c) => !c.approved).map((c) => (
               <div key={c.id} className="flex items-center gap-3 p-3 rounded-xl bg-muted/50 hover:bg-primary/5 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center font-heading font-bold text-primary text-sm">
-                  {c.logo}
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-heading font-bold text-sm ${c.logoImg ? "bg-transparent shadow-sm" : "bg-primary/10 text-primary"}`}>
+                  {c.logoImg ? (
+                    <img src={c.logoImg} alt={c.name} className="max-w-full max-h-full object-contain" />
+                  ) : (
+                    c.logo
+                  )}
                 </div>
                 <div className="flex-1">
                   <h4 className="text-sm font-medium">{c.name}</h4>

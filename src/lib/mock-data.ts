@@ -194,11 +194,11 @@ export const mockCandidates = [
 ];
 
 export const mockCompanies = [
-  { id: "1", name: "Infosys BPO", industry: "IT Services", employees: "1000+", approved: true, logo: "IB", jobs: 12 },
-  { id: "2", name: "TCS", industry: "IT Services", employees: "5000+", approved: true, logo: "TC", jobs: 8 },
-  { id: "3", name: "Wipro Analytics", industry: "Analytics", employees: "500+", approved: true, logo: "WA", jobs: 15 },
+  { id: "1", name: "Infosys BPO", industry: "IT Services", employees: "1000+", approved: true, logo: "IB", logoImg: "/logos/infosys.png", jobs: 12 },
+  { id: "2", name: "TCS", industry: "IT Services", employees: "5000+", approved: true, logo: "TC", logoImg: "/logos/tcs.png", jobs: 8 },
+  { id: "3", name: "Wipro Analytics", industry: "Analytics", employees: "500+", approved: true, logo: "WA", logoImg: "/logos/wipro.png", jobs: 15 },
   { id: "4", name: "StartupHub", industry: "Fintech", employees: "10-50", approved: false, logo: "SH", jobs: 3 },
-  { id: "5", name: "Reliance Industries", industry: "Conglomerate", employees: "10000+", approved: true, logo: "RI", jobs: 6 },
+  { id: "5", name: "Reliance Industries", industry: "Conglomerate", employees: "10000+", approved: true, logo: "RI", logoImg: "/logos/reliance.png", jobs: 6 },
   { id: "6", name: "TechNova", industry: "Software", employees: "50-100", approved: false, logo: "TN", jobs: 4 },
   { id: "7", name: "GreenLeaf Solutions", industry: "EdTech", employees: "20-50", approved: false, logo: "GL", jobs: 2 },
 ];

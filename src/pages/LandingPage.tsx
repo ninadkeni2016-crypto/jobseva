@@ -28,18 +28,17 @@ const hiringCategories = [
 ];
 
 const featuredCompanies = [
-  { name: "Amgen Inc", logo: "AM", logoColor: "bg-blue-800", rating: 3.0, reviews: "129", desc: "LIVE. WIN. THRIVE." },
-  { name: "Datamatics", logo: "D", logoColor: "bg-red-600", rating: 3.4, reviews: "2.4K+", desc: "Global digital solutions & technology company." },
-  { name: "Reliance Retail", logo: "RR", logoColor: "bg-blue-600", rating: 3.9, reviews: "27.2K+", desc: "Building India's largest retail company." },
-  { name: "ICICI Bank", logo: "IC", logoColor: "bg-orange-700", rating: 4.0, reviews: "45.5K+", desc: "Leading private sector bank in India." },
-  { name: "Cognizant", logo: "C", logoColor: "bg-blue-500", rating: 3.7, reviews: "60.8K+", desc: "Leading ITeS company with global presence." },
-  { name: "FIS", logo: "FIS", logoColor: "bg-indigo-700", rating: 3.8, reviews: "6.5K+", desc: "Global leader in financial services technology." },
-  { name: "Genpact", logo: "GP", logoColor: "bg-emerald-600", rating: 3.6, reviews: "41.6K+", desc: "Global professional services firm." },
-  { name: "Avalara Technologies", logo: "AV", logoColor: "bg-amber-600", rating: 2.9, reviews: "444", desc: "We're transforming tax through tech." },
-  { name: "Infosys", logo: "IN", logoColor: "bg-blue-700", rating: 3.6, reviews: "58K+", desc: "Global leader in next-gen digital services." },
-  { name: "TCS", logo: "TC", logoColor: "bg-indigo-600", rating: 3.7, reviews: "82K+", desc: "Pioneering innovation in IT services globally." },
-  { name: "Amazon", logo: "A", logoColor: "bg-orange-500", rating: 4.1, reviews: "25K+", desc: "World's largest internet company by revenue." },
-  { name: "Wipro", logo: "WI", logoColor: "bg-purple-600", rating: 3.5, reviews: "39K+", desc: "Leading global IT & business process services." },
+  { name: "Google", logoImg: "/logos/google.png", rating: 4.5, desc: "Organizing the world's information." },
+  { name: "Amazon", logoImg: "/logos/amazon.png", rating: 4.1, desc: "Earth's most customer-centric company." },
+  { name: "Apple", logoImg: "/logos/apple.png", rating: 4.7, desc: "Innovation in technology and design." },
+  { name: "Meta", logoImg: "/logos/meta.png", rating: 4.0, desc: "Bringing the world closer together." },
+  { name: "Microsoft", logoImg: "/logos/microsoft.png", rating: 4.3, desc: "Empowering every person on the planet." },
+  { name: "Netflix", logoImg: "/logos/netflix.png", rating: 4.4, desc: "Unlimited movies and TV shows." },
+  { name: "Adobe", logoImg: "/logos/adobe.png", rating: 4.2, desc: "Changing the world through digital experiences." },
+  { name: "Spotify", logoImg: "/logos/spotify.png", rating: 4.5, desc: "Music for everyone." },
+  { name: "Flipkart", logoImg: "/logos/flipkart.png", rating: 4.0, desc: "India's leading e-commerce marketplace." },
+  { name: "TCS", logoImg: "/logos/tcs.png", rating: 3.8, desc: "Pioneering innovation in IT services globally." },
+  { name: "Infosys", logoImg: "/logos/infosys.png", rating: 3.7, desc: "Global leader in next-gen digital services." },
 ];
 
 const steps = [
@@ -61,137 +60,45 @@ const fadeUp = {
 };
 
 function TopCompaniesSection() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (dir: "left" | "right") => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: dir === "left" ? -320 : 320, behavior: "smooth" });
-    }
-  };
+  const allLogos = [
+    ...featuredCompanies.map(c => ({ name: c.name, logoImg: c.logoImg })),
+    ...featuredCompanies.map(c => ({ name: c.name, logoImg: c.logoImg })) // Double for infinite loop
+  ];
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 border-y border-border">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 border-y border-border overflow-hidden bg-muted/10">
       <div className="max-w-6xl mx-auto">
-        {/* Top companies hiring now */}
         <motion.h2
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-2xl sm:text-3xl font-heading font-bold text-center mb-8"
+          className="text-2xl sm:text-3xl font-heading font-bold text-center mb-12"
         >
           Top companies <span className="text-primary">hiring now</span>
         </motion.h2>
 
-        {/* Category cards - scrollable row */}
-        <div className="flex gap-4 overflow-x-auto pb-4 mb-12 scrollbar-hide -mx-2 px-2">
-          {hiringCategories.map((cat, i) => (
-            <motion.div
-              key={cat.title}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="clean-card p-4 min-w-[200px] flex-shrink-0 hover:border-primary/30 transition-all duration-300 cursor-pointer group"
-            >
-              <div className="flex items-center gap-1 mb-1.5">
-                <h4 className="font-heading font-semibold text-sm group-hover:text-primary transition-colors">{cat.title}</h4>
-                <ChevronRight className="w-3.5 h-3.5 text-muted-foreground" />
-              </div>
-              <p className="text-[11px] text-muted-foreground mb-3">{cat.count} are actively hiring</p>
-              <div className="flex gap-1.5">
-                {cat.logos.map((logo) => (
-                  <div key={logo} className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center text-[9px] font-heading font-bold text-muted-foreground">
-                    {logo}
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Featured companies actively hiring */}
-        <motion.h2
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-2xl sm:text-3xl font-heading font-bold text-center mb-8"
-        >
-          Featured companies <span className="text-primary">actively hiring</span>
-        </motion.h2>
-
-        {/* Scrollable company cards with arrows */}
-        <div className="relative">
-          {/* Left Arrow */}
-          <button
-            onClick={() => scroll("left")}
-            className="absolute -left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-card border border-border shadow-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 transition-all hidden sm:flex"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-
-          {/* Right Arrow */}
-          <button
-            onClick={() => scroll("right")}
-            className="absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-card border border-border shadow-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/50 transition-all hidden sm:flex"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-
-          <div
-            ref={scrollRef}
-            className="flex gap-5 overflow-x-auto pb-4 scrollbar-hide -mx-2 px-2 snap-x"
-          >
-            {featuredCompanies.map((company, i) => (
-              <motion.div
-                key={company.name}
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="clean-card-hover w-[220px] flex-shrink-0 snap-start flex flex-col overflow-hidden"
+        <div className="relative flex overflow-x-hidden group">
+          <div className="flex animate-scroll whitespace-nowrap gap-8 py-4">
+            {allLogos.map((company, i) => (
+              <div
+                key={i}
+                className="flex-shrink-0 w-44 h-24 clean-card flex flex-col items-center justify-center p-4 hover:scale-105 transition-all duration-500 cursor-pointer bg-card/50 backdrop-blur-sm"
               >
-                {/* Logo area */}
-                <div className="h-24 flex items-center justify-center bg-muted/30 border-b border-border">
-                  <div className={`w-14 h-14 rounded-xl ${company.logoColor} flex items-center justify-center text-white font-heading font-bold text-base`}>
-                    {company.logo}
-                  </div>
+                <div className="w-16 h-16 flex items-center justify-center mb-2">
+                  <img src={company.logoImg} alt={company.name} className="max-w-full max-h-full object-contain" />
                 </div>
-
-                {/* Info */}
-                <div className="p-4 flex-1 flex flex-col">
-                  {/* Rating bar */}
-                  <div className="bg-muted/60 rounded-lg px-3 py-2 mb-3">
-                    <p className="font-heading font-semibold text-xs truncate mb-1">{company.name}</p>
-                    <div className="flex items-center gap-1.5">
-                      <Star className="w-3 h-3 text-warning fill-warning" />
-                      <span className="text-[11px] font-medium">{company.rating}</span>
-                      <span className="text-[10px] text-muted-foreground">{company.reviews} reviews</span>
-                    </div>
-                  </div>
-
-                  <p className="text-[11px] text-muted-foreground text-center leading-relaxed mb-4 flex-1">
-                    {company.desc}
-                  </p>
-
-                  <Link
-                    to="/login/user"
-                    className="w-full text-center py-2 rounded-lg border border-primary/30 text-primary text-xs font-heading font-semibold hover:bg-primary hover:text-primary-foreground transition-all duration-200"
-                  >
-                    View jobs
-                  </Link>
-                </div>
-              </motion.div>
+                <span className="text-[10px] font-heading font-semibold text-muted-foreground truncate w-full text-center">{company.name}</span>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* View all companies */}
-        <div className="text-center mt-8">
+        <div className="text-center mt-12">
           <Link
             to="/companies"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border border-primary/30 text-primary text-sm font-heading font-semibold hover:bg-primary hover:text-primary-foreground transition-all duration-200"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-xl border border-primary/20 text-primary text-sm font-heading font-semibold hover:bg-primary hover:text-primary-foreground transition-all duration-300"
           >
-            View all companies
+            View all companies <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>
@@ -204,7 +111,7 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden pt-16 sm:pt-20">
       <PublicNavbar />
-      
+
       {/* Hero - Premium CTA */}
       <section className="relative pb-20 sm:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Animated gradient blobs */}
@@ -213,13 +120,13 @@ export default function LandingPage() {
             animate={{ x: [0, 30, 0], y: [0, -20, 0], scale: [1, 1.1, 1] }}
             transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
             className="absolute -top-20 -left-20 w-72 h-72 sm:w-96 sm:h-96 rounded-full opacity-20"
-            style={{ background: "radial-gradient(circle, hsl(210 100% 45% / 0.6), transparent 70%)" }}
+            style={{ background: "radial-gradient(circle, #7C3AED, transparent 70%)" }}
           />
           <motion.div
             animate={{ x: [0, -25, 0], y: [0, 25, 0], scale: [1, 1.15, 1] }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             className="absolute -top-10 -right-20 w-80 h-80 sm:w-[28rem] sm:h-[28rem] rounded-full opacity-15"
-            style={{ background: "radial-gradient(circle, hsl(195 90% 50% / 0.5), transparent 70%)" }}
+            style={{ background: "radial-gradient(circle, #F97316, transparent 70%)" }}
           />
           <motion.div
             animate={{ x: [0, 15, 0], y: [0, -15, 0] }}
@@ -328,7 +235,7 @@ export default function LandingPage() {
           >
             Find the Right Job,{" "}
             <br className="hidden sm:block" />
-            <span className="text-primary hover-glow">Faster</span>
+            <span className="text-primary hover-glow">Faster with JobSeva</span>
           </motion.h1>
 
           <motion.p
@@ -402,10 +309,9 @@ export default function LandingPage() {
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Link
                   to="/login"
-                  className="group relative inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl font-heading font-semibold text-sm transition-all duration-300 text-white overflow-hidden"
+                  className="group relative inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl font-heading font-semibold text-sm transition-all duration-300 text-white overflow-hidden shadow-xl hover:shadow-primary/40"
                   style={{
-                    background: "linear-gradient(135deg, hsl(210 100% 45%), hsl(195 90% 50%))",
-                    boxShadow: "0 4px 20px hsl(210 100% 45% / 0.35)",
+                    background: "linear-gradient(135deg, #7C3AED, #F97316)",
                   }}
                 >
                   <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -582,7 +488,7 @@ export default function LandingPage() {
             <div>
               <h4 className="font-heading font-semibold text-sm mb-3">Quick Links</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><a href="#features" className="hover:text-primary inline-block hover:translate-x-1 transition-all duration-300">Features</a></li>
+                <li><Link to="/about" className="hover:text-primary inline-block hover:translate-x-1 transition-all duration-300">About Us</Link></li>
                 <li><a href="#jobs" className="hover:text-primary inline-block hover:translate-x-1 transition-all duration-300">Browse Jobs</a></li>
                 <li><a href="#how-it-works" className="hover:text-primary inline-block hover:translate-x-1 transition-all duration-300">How It Works</a></li>
                 <li><Link to="/app" className="hover:text-primary inline-block hover:translate-x-1 transition-all duration-300">Dashboard</Link></li>

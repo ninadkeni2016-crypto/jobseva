@@ -27,8 +27,7 @@ interface Company {
 const companies: Company[] = [
   {
     name: "Reliance Retail",
-    logo: "RR",
-    logoColor: "bg-blue-600",
+    logoImg: "/logos/reliance.png",
     rating: 3.9,
     reviews: "37.2K+",
     type: "Indian MNC",
@@ -42,8 +41,7 @@ const companies: Company[] = [
   },
   {
     name: "Cognizant",
-    logo: "C",
-    logoColor: "bg-blue-500",
+    logoImg: "/logos/cognizant.png",
     rating: 3.7,
     reviews: "41K+",
     type: "Foreign MNC",
@@ -57,8 +55,7 @@ const companies: Company[] = [
   },
   {
     name: "Infosys",
-    logo: "IN",
-    logoColor: "bg-blue-700",
+    logoImg: "/logos/infosys.png",
     rating: 3.6,
     reviews: "58K+",
     type: "Indian MNC",
@@ -72,8 +69,7 @@ const companies: Company[] = [
   },
   {
     name: "Amazon",
-    logo: "A",
-    logoColor: "bg-orange-500",
+    logoImg: "/logos/amazon.png",
     rating: 4.1,
     reviews: "25K+",
     type: "Foreign MNC",
@@ -87,8 +83,7 @@ const companies: Company[] = [
   },
   {
     name: "TCS",
-    logo: "TC",
-    logoColor: "bg-indigo-600",
+    logoImg: "/logos/tcs.png",
     rating: 3.7,
     reviews: "82K+",
     type: "Indian MNC",
@@ -102,8 +97,7 @@ const companies: Company[] = [
   },
   {
     name: "Wipro",
-    logo: "WI",
-    logoColor: "bg-purple-600",
+    logoImg: "/logos/wipro.png",
     rating: 3.5,
     reviews: "39K+",
     type: "Indian MNC",
@@ -117,8 +111,7 @@ const companies: Company[] = [
   },
   {
     name: "Capgemini",
-    logo: "CG",
-    logoColor: "bg-sky-600",
+    logoImg: "/logos/capgemini.png",
     rating: 3.8,
     reviews: "27K+",
     type: "Foreign MNC",
@@ -132,8 +125,7 @@ const companies: Company[] = [
   },
   {
     name: "Airtel",
-    logo: "AT",
-    logoColor: "bg-red-600",
+    logoImg: "/logos/airtel.png",
     rating: 3.9,
     reviews: "12K+",
     type: "Indian MNC",
@@ -147,8 +139,7 @@ const companies: Company[] = [
   },
   {
     name: "ICICI Bank",
-    logo: "IC",
-    logoColor: "bg-orange-700",
+    logoImg: "/logos/icici.png",
     rating: 3.8,
     reviews: "22K+",
     type: "Indian MNC",
@@ -372,8 +363,7 @@ const companies: Company[] = [
   },
   {
     name: "Flipkart",
-    logo: "FK",
-    logoColor: "bg-yellow-500",
+    logoImg: "/logos/flipkart.png",
     rating: 4.0,
     reviews: "10K+",
     type: "Indian MNC",
@@ -505,8 +495,8 @@ export default function CompaniesPage() {
                         key={n}
                         onClick={() => toggleFilter(selectedNatures, n, setSelectedNatures)}
                         className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 ${selectedNatures.includes(n)
-                            ? "bg-primary text-primary-foreground hover:scale-105"
-                            : "bg-muted text-muted-foreground hover:text-foreground hover:scale-105"
+                          ? "bg-primary text-primary-foreground hover:scale-105"
+                          : "bg-muted text-muted-foreground hover:text-foreground hover:scale-105"
                           }`}
                       >
                         {n}
@@ -617,8 +607,12 @@ export default function CompaniesPage() {
                   <div className="clean-card-hover p-5 h-full flex flex-col group">
                     {/* Header */}
                     <div className="flex items-start gap-3 mb-3">
-                      <div className={`w-12 h-12 rounded-xl ${company.logoColor} flex items-center justify-center text-white font-heading font-bold text-sm flex-shrink-0`}>
-                        {company.logo}
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-heading font-bold text-sm flex-shrink-0 ${company.logoImg ? "bg-transparent shadow-sm" : company.logoColor + " text-white"}`}>
+                        {company.logoImg ? (
+                          <img src={company.logoImg} alt={company.name} className="max-w-full max-h-full object-contain" />
+                        ) : (
+                          company.logo
+                        )}
                       </div>
                       <div className="min-w-0 flex-1">
                         <h3 className="font-heading font-semibold text-sm group-hover:text-primary transition-colors truncate">

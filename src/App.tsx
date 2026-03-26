@@ -8,6 +8,8 @@ import { AppProvider, useAppContext } from "@/contexts/AppContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import AppLayout from "@/components/AppLayout";
 import LandingPage from "@/pages/LandingPage";
+import AboutUs from "@/pages/AboutUs";
+import Settings from "@/pages/Settings";
 import LoginSelection from "@/pages/auth/LoginSelection";
 import RoleLogin from "@/pages/auth/RoleLogin";
 import RoleSignup from "@/pages/auth/RoleSignup";
@@ -69,7 +71,7 @@ function AppRoutes() {
         <Route path="admin/reports" element={<AdminReports />} />
 
         <Route path="notifications" element={<Messages />} />
-        <Route path="settings" element={<SeekerProfile />} />
+        <Route path="settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AppLayout>
@@ -84,7 +86,7 @@ function ScrollToTop() {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     document.documentElement.scrollTo({ top: 0, left: 0, behavior: "instant" });
     document.body.scrollTo({ top: 0, left: 0, behavior: "instant" });
-    
+
     // Secondary fallback for after framer-motion mounts
     const timer = setTimeout(() => {
       window.scrollTo({ top: 0, left: 0, behavior: "instant" });
@@ -107,6 +109,7 @@ const App = () => (
             <ScrollToTop />
             <Routes>
               <Route path="/" element={<LandingPage />} />
+              <Route path="/about" element={<AboutUs />} />
               {/* Auth routes */}
               <Route path="/login" element={<LoginSelection />} />
               <Route path="/login/:role" element={<RoleLogin />} />
